@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, IndexRedirect, browserHistory } from 'react-router';
-import sagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
+import { Router, Route, IndexRedirect, browserHistory } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
+import sagaMiddleware from 'redux-saga';
 
-import AccessControl from './src/utils/access-control';
 import reducers from './src/reducers';
 import saga from './src/sagas';
+import AccessControl from './src/utils/access-control';
 
 import SignIn from './src/components/sign-in';
 import Dashboard from './src/components/dashboard';

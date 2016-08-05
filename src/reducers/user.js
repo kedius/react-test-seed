@@ -22,9 +22,8 @@ const reducers = {
   [types.SET_USER_IS_AUTHENTICATING]: (state, action) =>
     state.set('isAutheticating', action.isAutheticating),
 
-  [types.RESET_USER_DATA]: (state, action) => {
-    return initialState.set('token', null);
-  }
+  [types.RESET_USER_DATA]: (state, action) =>
+    initialState.set('token', null)
 
 };
 

@@ -3,7 +3,7 @@ import { login, setErrors } from '../actions/user';
 
 export default class SignIn extends Component {
 
-  // try pass state without connect function
+  // try to pass state without connect function
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -17,6 +17,7 @@ export default class SignIn extends Component {
 
   handleLogin = e => {
     e.preventDefault();
+    
     const { dispatch } = this.context.store;
     dispatch(login(this.state));
   };
