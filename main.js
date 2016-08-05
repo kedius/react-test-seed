@@ -9,7 +9,6 @@ import Security from './src/utils/security';
 import reducers from './src/reducers';
 import saga from './src/sagas';
 
-import App from './src/components/sign-in';
 import SignIn from './src/components/sign-in';
 import Dashboard from './src/components/dashboard';
 import Page1 from './src/components/dashboard/first-page';
