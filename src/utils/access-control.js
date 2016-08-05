@@ -5,7 +5,7 @@ import { initUser, setIsLoading } from '../actions/user';
 
 export default (Page, role) => {
 
-  class Security extends Component {
+  class AccessControl extends Component {
 
     componentWillMount() {
       const { user } = this.props;
@@ -64,6 +64,6 @@ export default (Page, role) => {
       user: state.user
     }),
     { initUser, setIsLoading }
-  )(Security);
+  )(AccessControl);
 
 }
