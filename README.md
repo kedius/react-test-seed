@@ -1,5 +1,8 @@
 # react-test-seed
 
+> npm i
+
+
 > npm run client
 
 
