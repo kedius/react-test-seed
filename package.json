@@ -1,0 +1,43 @@
+{
+  "name": "react-test-seed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "client": "./node_modules/.bin/webpack-dev-server --progress",
+    "server": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "immutable": "3.7.6",
+    "lodash": "^4.14.1",
+    "moment": "^2.14.1",
+    "react": "^15.3.0",
+    "react-dom": "0.14.7",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.6.1",
+    "redux": "^3.5.2",
+    "redux-saga": "0.9.1",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-core": "6.5.2",
+    "babel-eslint": "5.0.0",
+    "babel-loader": "6.2.3",
+    "babel-plugin-react-transform": "2.0.0",
+    "babel-plugin-transform-decorators-legacy": "1.3.4",
+    "babel-polyfill": "6.5.0",
+    "babel-preset-es2015": "6.5.0",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-0": "6.5.0",
+    "eslint": "2.2.0",
+    "eslint-loader": "1.3.0",
+    "eslint-plugin-react": "4.0.0",
+    "webpack": "1.12.13",
+    "webpack-dev-server": "1.14.1",
+    "html-webpack-plugin": "2.9.0",
+    "react-transform-hmr": "1.0.2"
+  }
+}

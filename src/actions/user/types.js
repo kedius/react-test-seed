@@ -1,0 +1,9 @@
+export const SET_ERRORS = 'SET_ERRORS';
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const RESET_USER_DATA = 'RESET_USER_DATA';
+export const SET_USER_IS_LOADING = 'SET_USER_IS_LOADING';
+export const SET_USER_IS_AUTHENTICATING = 'SET_USER_IS_AUTHENTICATING';
+
+export const INIT_USER = 'INIT_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
