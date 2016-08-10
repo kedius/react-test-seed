@@ -47,7 +47,10 @@ export default class SignIn extends Component {
         <h1>Login Form</h1>
         <form onSubmit={this.handleLogin}>
           <div>
-            <span><strong>Email\Password:</strong> user@example.com\123456</span>
+            <span><strong>Email:</strong> user@example.com</span>
+          </div>
+          <div>
+            <span><strong>Password:</strong> 123456</span>
           </div>
           <br />
           { this.state.error !== null && <div style={{ color: 'red'}}>{this.state.error}</div> }
