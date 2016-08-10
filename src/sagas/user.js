@@ -14,7 +14,7 @@ function* initUser(action) {
     yield put(actions.setUser(data));
   } catch (exception) {
     console.warn(exception.error);
-    yield put(actions.setIsLoading(false));
+    yield put(actions.resetUser());
   }
 }
 
