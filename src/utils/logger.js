@@ -13,7 +13,7 @@ export default store => next => action => {
     }, {});
   };
 
-  console.group(`[${window.performance.now().toFixed(2)}] Action: ${type}`);
+  console.group(`[${(Math.round(window.performance.now()) / 1000).toFixed(3)}] Action: ${type}`);
   console.log(params);
   console.log('%c prev state:', 'line-height: 18px; color: blue; font-weight: bold', parseImmutableState());
 
