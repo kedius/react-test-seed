@@ -1,69 +1,55 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
-import { initUser, setIsLoading } from '../actions/user';
+import { initUser } from '../actions/user';
 
-export default (Page, role) => {
-
-  class AccessControl extends Component {
-
-    componentWillMount() {
-      const { user } = this.props;
-      this.state = { accessIsGranted: false };
-
-      if (!user.get('id') && !user.get('isLoading') && user.get('token')) {
-        this.props.setIsLoading();
-        this.props.initUser(user.get('token'));
-      }
-
-      this.checkAccess(user);
-    }
-
-    componentWillReceiveProps(nextProps) {
-      const { user } = nextProps;
-      this.checkAccess(user);
-    }
-
-    checkAccess = user => {
-      let accessIsGranted = true;
-
-      if (!user.get('id') && role === '@') {
-        if (!user.get('isLoading')) {
-          sessionStorage.setItem('next', this.props.location.pathname);
-          browserHistory.push('/sign-in');
-        }
-        accessIsGranted = false;
-      }
-
-      if (user.get('id') && role === 'GUEST') {
-        browserHistory.push(sessionStorage.getItem('next') || '/');
-        sessionStorage.removeItem('next');
-        accessIsGranted = false;
-      }
-
-      this.setState({ accessIsGranted });
-    };
-
-    render() {
-      const { user } = this.props;
-
-      if (!user.get('id') && user.get('isLoading')) {
-        return <h1>User is loading</h1>;
-      }
-
-      if (this.state.accessIsGranted) {
-        return <Page {...this.props}/>;
-      }
-
-      return null;
-    }
+export default class AccessControl {
+  constructor(store) {
+    this.store = store;
   }
 
-  return connect(
-    state => ({
-      user: state.user
-    }),
-    { initUser, setIsLoading }
-  )(AccessControl);
+  except = (role) => {
+    return this.checkAccess(role, (replace, callback) => {
+      const { user } = this.store.getState();
 
+      if (!user.get('isLoading')) {
+        if (role === user.get('role')) {
+          replace(role !== 'GUEST' ? '/' : '/sign-in');
+          typeof this.unsubscribe === 'function' && this.unsubscribe();
+        }
+
+        callback();
+      }
+    });
+  };
+
+  require = (role) => {
+    return this.checkAccess(role, (replace, callback) => {
+      const { user } = this.store.getState();
+
+      if (!user.get('isLoading')) {
+        if (role !== user.get('role')) {
+          replace(role === 'GUEST' ? '/' : '/sign-in');
+          typeof this.unsubscribe === 'function' && this.unsubscribe();
+        }
+
+        callback();
+      }
+    });
+  };
+
+  checkAccess(role, rule) {
+    return (nextState, replace, callback) => {
+      const { user } = this.store.getState();
+      const accessToken = localStorage.getItem('accessToken');
+
+      if (!user.get('isLoading')) {
+        if (accessToken && !user.get('id')) {
+          this.store.dispatch(initUser(accessToken));
+        } else {
+          rule(replace, callback);
+        }
+
+        typeof this.unsubscribe === 'function' && this.unsubscribe();
+        this.unsubscribe = this.store.subscribe(rule.bind(this, replace, callback));
+      }
+    }
+  }
 }

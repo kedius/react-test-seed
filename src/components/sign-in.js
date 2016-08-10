@@ -11,13 +11,25 @@ export default class SignIn extends Component {
   componentWillMount() {
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: null
     };
+
+    this.unsubscribe = this.context.store.subscribe(() => {
+      const { user } = this.context.store.getState();
+      if (this.state.error !== user.get('errors') && user.get('errors') !== null) {
+        this.setState({ error: user.get('errors') });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    typeof this.unsubscribe === 'function' && this.unsubscribe();
   }
 
   handleLogin = e => {
     e.preventDefault();
-    
+
     const { dispatch } = this.context.store;
     dispatch(login(this.state));
   };
@@ -38,7 +50,7 @@ export default class SignIn extends Component {
             <span><strong>Email\Password:</strong> user@example.com\123456</span>
           </div>
           <br />
-          { user.get('errors') !== null && <div style={{ color: 'red'}}>{user.get('errors')}</div> }
+          { this.state.error !== null && <div style={{ color: 'red'}}>{this.state.error}</div> }
           <div>
             <input
               type="email"

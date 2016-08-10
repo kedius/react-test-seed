@@ -1,23 +1,23 @@
-export default function() {
+export default class ApiFetch {
+  constructor() {
+    this.serverUrl = 'http://localhost:7001';
+    this.headers = {
+      'Accept': 'application/json'
+    };
+  }
 
-  this.serverUrl = 'http://localhost:7001';
-
-  this.headers = {
-    'Accept': 'application/json'
-  };
-
-  this.get = (endpoint, query = {}, headers = {}) => {
-    return this._parseResponse(fetch(
-      `${this.serverUrl}/${endpoint}?${this._querySerializer(query)}`,
+  get = (endpoint, query = {}, headers = {}) => {
+    return this.parseResponse(fetch(
+      `${this.serverUrl}/${endpoint}?${this.querySerializer(query)}`,
       {
         method: 'GET',
         headers: { ...this.headers, ...headers }
       }
     ));
-  }
+  };
 
-  this.post = (endpoint, body = {}, headers = {}) => {
-    return this._parseResponse(fetch(
+  post = (endpoint, body = {}, headers = {}) => {
+    return this.parseResponse(fetch(
       `${this.serverUrl}/${endpoint}`,
       {
         method: 'POST',
@@ -25,17 +25,17 @@ export default function() {
         headers: { ...this.headers, ...headers }
       }
     ));
-  }
+  };
 
-  this._parseResponse = fetch => {
+  parseResponse(fetch) {
     return fetch
       .then(response => {
         return response.json()
           .then(json => response.ok ? Promise.resolve(json) : Promise.reject(json));
       });
-  };
+  }
 
-  this._querySerializer = object => {
+  querySerializer(object) {
     let query = [];
 
     for(let key in object) {
@@ -45,5 +45,5 @@ export default function() {
     }
 
     return query.join("&");
-  };
+  }
 }

@@ -8,6 +8,7 @@ import ApiFetch from '../utils/api-fetch';
 function* initUser(action) {
   const { accessToken } = action;
 
+  yield put(actions.setIsLoading());
   try {
     const data = yield new ApiFetch().get('login', { accessToken });
     yield put(actions.setUser(data));

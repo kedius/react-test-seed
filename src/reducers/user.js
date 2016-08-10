@@ -6,7 +6,8 @@ const initialState = Immutable.fromJS({
   isLoading: false,
   isAutheticating: false,
   token: localStorage.getItem('accessToken'),
-  errors: null
+  errors: null,
+  role: 'GUEST'
 });
 
 const reducers = {

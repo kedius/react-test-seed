@@ -11,13 +11,15 @@ var users = [{
   password: 'a08fd7e3e716e1ac864b633551e8d66bdaff32c2723bde1a181a33daff55ec1d', //qwaszx@1
   date_of_birth: moment.utc('1990-12-10', 'YYYY-MM-DD').format(),
   avatar: 'https://scontent-amt2-1.xx.fbcdn.net/v/t1.0-1/c28.42.348.348/s160x160/267363_191904990872566_1244812_n.jpg?oh=9e3f318eb0b33c3a81a9e8be73b30400&oe=58131950',
+  role: 'USER'
 }, {
   id: 2,
   username: 'User Example',
   email: 'user@example.com',
   password: '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', //123456
   date_of_birth: moment.utc('1970-01-01', 'YYYY-MM-DD').format(),
-  avatar: null
+  avatar: null,
+  role: 'USER'
 }];
 
 const Router = function(req, res) {
