@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 
-import * as actions from '../actions/user';
+import { resetUser } from '../actions/user';
 
 @connect(
   state => ({
     user: state.user
   }),
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-  })
+  {
+    logout: resetUser
+  }
 )
 export default class Dashboard extends Component {
 
   handleLogout = () => {
-    this.props.actions.resetUser();
+    this.props.logout();
   };
 
   render() {
