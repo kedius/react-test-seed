@@ -5,7 +5,7 @@ export default class AccessControl {
     this.store = store;
   }
 
-  except = (role) => {
+  except = role => {
     return this.checkAccess(role, (replace, callback) => {
       const { user } = this.store.getState();
 
@@ -20,7 +20,7 @@ export default class AccessControl {
     });
   };
 
-  require = (role) => {
+  require = role => {
     return this.checkAccess(role, (replace, callback) => {
       const { user } = this.store.getState();
 
