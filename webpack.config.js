@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const env = process.env.NODE_ENV || 'dev';
 
 module.exports = {
   context: __dirname,
@@ -18,16 +19,28 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: `${__dirname}/index.html`
     })
-  ],
-  devServer: {
+  ]
+};
+
+if (env === 'dev') {
+  module.exports.plugins.push(new webpack.HotModuleReplacementPlugin());
+  module.exports.devServer = {
     colors: true,
     historyApiFallback: true,
     inline: true,
     hot: true,
     port: process.env.PORT || 7002
-  }
-};
+  };
+}
+
+if (env === 'prod') {
+  module.exports.output.filename = 'assets/[name].min.js';
+  module.exports.plugins.push(
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  );
+}

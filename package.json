@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "client": "./node_modules/.bin/webpack-dev-server --progress",
+    "build": "NODE_ENV=prod ./node_modules/.bin/webpack --progress",
     "server": "node server.js"
   },
   "keywords": [],
